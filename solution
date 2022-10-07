@@ -1,0 +1,51 @@
+# Python program for the above approach
+
+# Function to find No of cells Elephant
+# and Camel can attack and return max of that
+def fun(n, r, c):
+
+	# Edge Case
+	if (n == 1):
+		return [0, 0];
+
+	# For Rook
+	row = n - 1
+	col = n - 1
+
+	# For Bishop
+	UL = min(r - 1, c - 1);
+	UR = min(r - 1, n - c);
+	DL = min(n - r, c - 1);
+	DR = min(n - r, n - c);
+
+	# Count total moves of Rook
+	E = row + col;
+
+	# Count total moves of Bishop
+	C = DL + DR + UL + UR;
+
+	# Return maximum among two, consider
+	# 0 for Rook, 1 for Bishop, -1 for both
+	if (E == C):
+		return [-1, E];
+	if (E > C):
+		return [0, E];
+	return [1, C];
+
+
+# Driver Code
+
+N = 3
+R = 2
+C = 1
+
+# Function call
+p = fun(N, R, C);
+
+if (p[0] == -1):
+	print("Both, ", end="");
+elif (p[0] == 0):
+	print("Rook, ", end="");
+else:
+	print("Bishop, ", end="");
+print(p[1]);
